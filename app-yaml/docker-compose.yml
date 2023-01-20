@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  backend:
+    image: backend:v1
+    volumes:
+      - ./app/:/usr/src/app/
+    ports:
+      - 8000:8000
