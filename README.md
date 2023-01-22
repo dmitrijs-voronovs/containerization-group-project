@@ -6,12 +6,23 @@
 
 ## Run locally
 
-1. create .env file under `app-yaml` with the following structure
-
+1. create backend image
+2. 
 ```sh
-POSTGRES_NAME=<postgres_name>
-POSTGRES_USER=<postgres_user>
-POSTGRES_PASSWORD=<postgres_password>
+cd backend
+docker build -t backend:v1 .
 ```
 
-2. run `docker-compose up`
+1. create backend image
+2. 
+```sh
+cd frontend
+docker build -t frontend:v2 .
+```
+
+1. run `docker-compose up`
+
+```sh
+cd app-yaml
+docker-compose up -d
+```
