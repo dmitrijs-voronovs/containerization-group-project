@@ -6,15 +6,17 @@
 
 ## Run locally
 
-1. create backend image
-2. 
+1. create a backend image
+2.
+
 ```sh
 cd backend
 docker build -t backend:v1 .
 ```
 
-1. create backend image
-2. 
+1. create a frontend image
+2.
+
 ```sh
 cd frontend
 docker build -t frontend:v2 .
