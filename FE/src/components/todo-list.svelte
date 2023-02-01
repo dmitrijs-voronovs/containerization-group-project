@@ -6,6 +6,13 @@
     export let toggleCompleted;
 </script>
 
+<style>
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+</style>
+
 <ul>
     {#each todos as todo}
         <TodoItem 
