@@ -33,7 +33,7 @@
 </style>
 
 <main>
-	<h1>TODO App</h1>
+<h1>TODO App</h1>
 <TodoList todos={todos} deleteTodo={deleteTodo} toggleCompleted={toggleCompleted} />
 <AddTodoForm addTodo={addTodo} />
 </main>
