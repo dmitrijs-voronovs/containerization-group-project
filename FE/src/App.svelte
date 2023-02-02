@@ -43,10 +43,7 @@
 			body: JSON.stringify(item),
 		});
 		const data = await response.json();
-		console.log({ data });
-		console.log("before", todos);
 		todos = todos.map((todo) => (todo.id === id ? data : todo));
-		console.log("after", todos);
 	}
 
 	async function deleteTodo(id) {

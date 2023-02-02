@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse, QueryDict
 from django.views.decorators.csrf import csrf_exempt
-
+import json
 from .models import Todo
 
 @csrf_exempt
@@ -17,9 +17,10 @@ def todo_detail(request, pk):
     return JsonResponse(data)
 
 @csrf_exempt
-def todo_create(request): 
+def todo_create(request):
     if request.method == "POST":
-        todo = Todo.objects.create(title=request.POST.get("title", "Empty TODO"))
+        body = json.loads(request.body)
+        todo = Todo.objects.create(title=body.get("title", "Empty TODO 2"))
         data = {"id": todo.id, "title": todo.title, "completed": todo.completed}
         return JsonResponse(data)
 
@@ -27,8 +28,9 @@ def todo_create(request):
 def todo_update(request, pk):
     todo = get_object_or_404(Todo, pk=pk)
     if request.method == "PUT":
-        todo.title = QueryDict(request.body).get("title", todo.title)
-        todo.completed = QueryDict(request.body).get("completed", todo.completed)
+        body = json.loads(request.body)
+        todo.title = body.get("title", todo.title)
+        todo.completed = body.get("completed", todo.completed)
         todo.save()
         data = {"id": todo.id, "title": todo.title, "completed": todo.completed}
         return JsonResponse(data)

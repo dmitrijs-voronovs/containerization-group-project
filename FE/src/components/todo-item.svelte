@@ -2,11 +2,11 @@
 	export let title;
 	export let completed;
 	export let deleteTodo;
-	export let onClick;
+	export let toggleTodo;
 </script>
 
 <div>
-	<button on:click={onClick} class:completed>{title}</button>
+	<button on:click={toggleTodo} class:completed>{title}</button>
 	<button on:click={deleteTodo}>Delete</button>
 </div>
 

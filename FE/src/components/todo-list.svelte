@@ -12,7 +12,7 @@
 			title={todo.title}
 			completed={todo.completed}
 			deleteTodo={() => deleteTodo(todo.id)}
-			onClick={() => toggleTodo(todo.id)}
+			toggleTodo={() => toggleTodo(todo.id)}
 		/>
 	{/each}
 </ul>
