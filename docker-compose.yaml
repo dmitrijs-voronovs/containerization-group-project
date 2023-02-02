@@ -1,0 +1,52 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=$POSTGRES_DB
+      - POSTGRES_NAME=$POSTGRES_NAME
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    networks:
+      - be-db
+    ports:
+      - 5432:5432
+  backend:
+    # image: localhost:32000/backend
+    build: ./BE
+    volumes:
+      - ./BE/:/app/
+    ports:
+      - 8000:8000
+    environment:
+      - POSTGRES_NAME=$POSTGRES_NAME
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    networks:
+      - be-fe
+      - be-db
+    depends_on:
+      - db
+  frontend:
+    # image: localhost:32000/frontend
+    build: ./FE
+    volumes:
+      - ./FE/:/app/
+    ports:
+      - 3000:5050
+    networks:
+      - be-fe
+    depends_on:
+      - backend
+
+volumes:
+  db-data:
+#     driver: bridge
+
+networks:
+  be-fe:
+    driver: bridge
+  be-db:
+    driver: bridge
