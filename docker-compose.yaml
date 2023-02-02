@@ -32,8 +32,8 @@ services:
   frontend:
     # image: localhost:32000/frontend
     build: ./FE
-    volumes:
-      - ./FE/:/app/
+    # volumes:
+    #   - ./FE/:/app/
     ports:
       - 3000:5050
     networks:

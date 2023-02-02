@@ -1,25 +1,25 @@
 <script>
-    import TodoItem from './todo-item.svelte';
+	import TodoItem from "./todo-item.svelte";
 
-    export let todos;
-    export let deleteTodo;
-    export let toggleCompleted;
+	export let todos;
+	export let deleteTodo;
+	export let toggleTodo;
 </script>
 
-<style>
-    ul {
-        list-style: none;
-        padding: 0;
-    }
-</style>
-
 <ul>
-    {#each todos as todo}
-        <TodoItem 
-            title={todo.title} 
-            completed={todo.completed}
-            deleteTodo={() => deleteTodo(todo.id)}
-            onClick={() => toggleCompleted(todo.id)}
-        />
-    {/each}
+	{#each todos as todo}
+		<TodoItem
+			title={todo.title}
+			completed={todo.completed}
+			deleteTodo={() => deleteTodo(todo.id)}
+			onClick={() => toggleTodo(todo.id)}
+		/>
+	{/each}
 </ul>
+
+<style>
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+</style>

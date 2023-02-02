@@ -4,3 +4,4 @@ django-binary-database-files==1.0.17
 psycopg2-binary==2.9.5
 sqlparse==0.4.3
 tzdata==2022.7
+django-cors-headers==3.13.0

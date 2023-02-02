@@ -1,39 +1,75 @@
 <script>
-    import TodoList from './components/todo-list.svelte';
-    import AddTodoForm from './components/add-todo-form.svelte';
+	import TodoList from "./components/todo-list.svelte";
+	import AddTodoForm from "./components/add-todo-form.svelte";
+	import { onMount } from "svelte";
 
-    let todos = [
-        {id: 1, title: 'Todo 1', completed: false},
-        {id: 2, title: 'Todo 2', completed: true},
-        {id: 3, title: 'Todo 3', completed: false},
-    ];
+	const BE_URL = "http://localhost:8000";
+	function getCookie(name) {
+		const match = document.cookie.match(
+			new RegExp("(^| )" + name + "=([^;]+)")
+		);
+		if (match) return match[2];
+	}
+	const csrftoken = getCookie("csrftoken");
+	const headers = new Headers();
+	headers.append("X-CSRFToken", csrftoken);
+	const fetchWithCSRF = (url, opts) =>
+		// fetch(url, { ...opts, headers, credentials: "include" });
+		fetch(url, { ...opts, headers });
 
-    const addTodo = (title) => {
-        todos = [...todos, { id: todos.length + 1, title, completed: false }];
-    };
+	let todos = [];
 
-    const deleteTodo = (id) => {
-        todos = todos.filter(todo => todo.id !== id);
-    };
+	onMount(async function () {
+		const response = await fetchWithCSRF(`${BE_URL}/todos/`);
+		const data = await response.json();
+		todos = data.results;
+	});
 
-    const toggleCompleted = (id) => {
-        todos = todos.map(todo => {
-            if (todo.id === id) {
-                return { ...todo, completed: !todo.completed };
-            }
-            return todo;
-        });
-    };
+	async function createTodo(title) {
+		const response = await fetchWithCSRF(`${BE_URL}/todos/create/`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ title: title }),
+		});
+		const data = await response.json();
+		todos = [...todos, data];
+	}
+
+	async function updateTodo(item) {
+		const { id } = item;
+		const response = await fetchWithCSRF(`${BE_URL}/todos/${id}/update/`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(item),
+		});
+		const data = await response.json();
+		console.log({ data });
+		console.log("before", todos);
+		todos = todos.map((todo) => (todo.id === id ? data : todo));
+		console.log("after", todos);
+	}
+
+	async function deleteTodo(id) {
+		await fetchWithCSRF(`${BE_URL}/todos/${id}/delete/`, {
+			method: "DELETE",
+		});
+		todos = todos.filter((todo) => todo.id !== id);
+	}
+
+	async function toggleTodo(id) {
+		const todo = todos.find((todo) => todo.id === id);
+		await updateTodo({ ...todo, completed: !todo.completed });
+	}
 </script>
+
+<main>
+	<h1>TODO App</h1>
+	<TodoList {todos} {deleteTodo} {toggleTodo} />
+	<AddTodoForm addTodo={createTodo} />
+</main>
 
 <style>
 	main {
 		text-align: center;
 	}
 </style>
-
-<main>
-<h1>TODO App</h1>
-<TodoList todos={todos} deleteTodo={deleteTodo} toggleCompleted={toggleCompleted} />
-<AddTodoForm addTodo={addTodo} />
-</main>
