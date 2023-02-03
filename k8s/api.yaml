@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: api-container
-          image: localhost:32000/be:v1
+          image: dmitrylv/todo-be:latest
           ports:
             - containerPort: 8000
           env:

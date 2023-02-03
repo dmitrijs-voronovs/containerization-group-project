@@ -16,6 +16,11 @@ spec:
     spec:
       containers:
         - name: ui-container
-          image: localhost:32000/fe:v1
+          image: dmitrylv/todo-fe:latest
           ports:
             - containerPort: 5050
+          # env:
+          #   - name: API_SERVICE_SERVICE_HOST
+          #     value: $API_SERVICE_SERVICE_HOST
+          #   - name: API_SERVICE_SERVICE_PORT
+          #     value: $API_SERVICE_SERVICE_PORT

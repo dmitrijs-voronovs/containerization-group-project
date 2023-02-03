@@ -3,7 +3,10 @@
 	import AddTodoForm from "./components/add-todo-form.svelte";
 	import { onMount } from "svelte";
 
-	const BE_URL = "http://localhost:8000";
+	// const BE_URL = "http://localhost:8000";
+	console.log(API_SERVICE_SERVICE_HOST, API_SERVICE_SERVICE_PORT);
+	const BE_URL = `http://${API_SERVICE_SERVICE_HOST}:${API_SERVICE_SERVICE_PORT}`;
+	console.log(BE_URL);
 	function getCookie(name) {
 		const match = document.cookie.match(
 			new RegExp("(^| )" + name + "=([^;]+)")

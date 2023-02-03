@@ -14,9 +14,9 @@ services:
     ports:
       - 5432:5432
   backend:
-    # image: localhost:32000/backend
+    image: localhost:32000/be
     build: ./BE
-    image: be:v1
+    # image: be:v1
     volumes:
       - ./BE/:/app/
     ports:
@@ -25,19 +25,24 @@ services:
       - POSTGRES_NAME=$POSTGRES_NAME
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - DB_SERVICE_SERVICE_HOST=db
+      - DB_SERVICE_SERVICE_PORT=5432
     networks:
       - be-fe
       - be-db
     depends_on:
       - db
   frontend:
-    # image: localhost:32000/frontend
+    image: localhost:32000/fe
     build: ./FE
-    image: fe:v1
+    # image: fe:v1
     # volumes:
     #   - ./FE/:/app/
     ports:
       - 3000:5050
+    environment:
+      - API_SERVICE_SERVICE_HOST=$API_SERVICE_SERVICE_HOST
+      - API_SERVICE_SERVICE_PORT=$API_SERVICE_SERVICE_PORT
     networks:
       - be-fe
     depends_on:
