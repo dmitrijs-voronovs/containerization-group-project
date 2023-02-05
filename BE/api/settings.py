@@ -89,34 +89,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'api.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('POSTGRES_NAME'),
         'USER': os.environ.get('POSTGRES_USER'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        # 'NAME': 'postgres',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'postgres',
-        # 'HOST': 'db',
-        # 'PORT': '5432',
-        # 'HOST': '127.0.0.1',
-        # 'HOST': 'localhost',
-        # 'HOST': os.environ.get('POSTGRES_HOST'),
-        # 'PORT': os.environ.get('POSTGRES_PORT'),
         'HOST': os.environ.get('DB_SERVICE_HOST'),
         'PORT': os.environ.get('DB_SERVICE_PORT'),
-        # 'HOST': 'db',
-        # 'PORT': '5432',
     }
 }
 
