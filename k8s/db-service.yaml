@@ -3,12 +3,9 @@ kind: Service
 metadata:
   name: db
 spec:
-  # TODO: make cluster ip
-  # type: ClusterIP
-  type: NodePort
+  type: ClusterIP
   ports:
-    - nodePort: 30003
-      port: 5432
+    - port: 5432
       targetPort: 5432
   selector:
     app: db
