@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: api-container
-          image: dmitrylv/todo-be:latest
+          image: dmitrylv/todo-be:v0.1
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
           env:

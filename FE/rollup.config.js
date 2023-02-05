@@ -47,6 +47,7 @@ export default {
 	},
 	plugins: [
 		replace({
+			ENV: JSON.stringify(process.env),
 			API_SERVICE_SERVICE_HOST: `'${process.env.API_SERVICE_SERVICE_HOST}'`,
 			API_SERVICE_SERVICE_PORT: `'${process.env.API_SERVICE_SERVICE_PORT}'`,
 		}),

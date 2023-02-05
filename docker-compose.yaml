@@ -13,8 +13,10 @@ services:
       - be-db
     ports:
       - 5432:5432
-  backend:
-    image: localhost:32000/be
+  api:
+    # image: localhost:32000/be
+    # image: dmitrylv/todo-be:latest
+    image: dmitrylv/todo-be:v0.1
     build: ./BE
     # image: be:v1
     volumes:
@@ -25,28 +27,43 @@ services:
       - POSTGRES_NAME=$POSTGRES_NAME
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-      - DB_SERVICE_SERVICE_HOST=db
-      - DB_SERVICE_SERVICE_PORT=5432
+      - DB_SERVICE_HOST=db
+      - DB_SERVICE_PORT=5432
     networks:
       - be-fe
       - be-db
     depends_on:
       - db
-  frontend:
-    image: localhost:32000/fe
-    build: ./FE
+  ui:
+    # image: localhost:32000/fe:latest
+    # image: dmitrylv/todo-fe:latest
+    image: dmitrylv/todo-fe:v0.1
+    build:
+      context: ./FE
+      args:
+        - API_SERVICE_SERVICE_HOST=$API_SERVICE_SERVICE_HOST
+        - API_SERVICE_SERVICE_PORT=$API_SERVICE_SERVICE_PORT
     # image: fe:v1
     # volumes:
     #   - ./FE/:/app/
     ports:
-      - 3000:5050
+      - 5050:5050
     environment:
       - API_SERVICE_SERVICE_HOST=$API_SERVICE_SERVICE_HOST
       - API_SERVICE_SERVICE_PORT=$API_SERVICE_SERVICE_PORT
     networks:
       - be-fe
     depends_on:
-      - backend
+      - api
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    networks:
+      - be-fe
+    depends_on:
+      - ui
+      - api
 
 volumes:
   db-data:

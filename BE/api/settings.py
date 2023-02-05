@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-dg9e60z!u=)2u5!fie=2pt5nfh%+8(wx2v0*2_#=rv9qm2jrw5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://localhost:3000', 'https://localhost:3000']
+ALLOWED_HOSTS = ['http://localhost:3000', 'https://localhost:3000', 'http://ui:5050', 'http://localhost:5050']
 
 
 # Application definition
@@ -64,7 +64,8 @@ MIDDLEWARE = [
 
 ALLOWED_HOSTS=['*']
 CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000']
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000', 'http://ui:5050', 'http://localhost:5050']
+# CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000']
 # CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:3000', 'https://127.0.0.1:3000']
 
 ROOT_URLCONF = 'api.urls'
@@ -112,8 +113,10 @@ DATABASES = {
         # 'HOST': 'localhost',
         # 'HOST': os.environ.get('POSTGRES_HOST'),
         # 'PORT': os.environ.get('POSTGRES_PORT'),
-        'HOST': os.environ.get('DB_SERVICE_SERVICE_HOST'),
-        'PORT': os.environ.get('DB_SERVICE_SERVICE_PORT'),
+        'HOST': os.environ.get('DB_SERVICE_HOST'),
+        'PORT': os.environ.get('DB_SERVICE_PORT'),
+        # 'HOST': 'db',
+        # 'PORT': '5432',
     }
 }
 

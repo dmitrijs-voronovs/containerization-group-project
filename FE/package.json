@@ -5,13 +5,16 @@
 	"scripts": {
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
-		"start": "sirv public --no-clear --host 0.0.0.0"
+		"start": "sirv public --no-clear --host 0.0.0.0",
+		"prod": "npm run build && npm run start",
+		"prodWithEnv": "npx dotenv-run-script build && npm run start"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^17.0.0",
 		"@rollup/plugin-node-resolve": "^11.0.0",
 		"@rollup/plugin-replace": "^5.0.2",
 		"dotenv": "^16.0.3",
+		"dotenv-run-script": "^0.2.0",
 		"rollup": "^2.3.4",
 		"rollup-plugin-css-only": "^3.1.0",
 		"rollup-plugin-livereload": "^2.0.0",

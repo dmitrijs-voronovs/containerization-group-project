@@ -16,11 +16,7 @@ spec:
     spec:
       containers:
         - name: ui-container
-          image: dmitrylv/todo-fe:latest
+          image: dmitrylv/todo-fe:v0.1
+          imagePullPolicy: Always
           ports:
             - containerPort: 5050
-          # env:
-          #   - name: API_SERVICE_SERVICE_HOST
-          #     value: $API_SERVICE_SERVICE_HOST
-          #   - name: API_SERVICE_SERVICE_PORT
-          #     value: $API_SERVICE_SERVICE_PORT

@@ -270,10 +270,28 @@
   "resolved" "https://registry.npmjs.org/deepmerge/-/deepmerge-4.3.0.tgz"
   "version" "4.3.0"
 
+"dotenv-expand@^5.1.0":
+  "integrity" "sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA=="
+  "resolved" "https://registry.npmjs.org/dotenv-expand/-/dotenv-expand-5.1.0.tgz"
+  "version" "5.1.0"
+
+"dotenv-run-script@^0.2.0":
+  "integrity" "sha512-7uLtpTeGZAcIa0qF+zd8ZAS9CZrRf3RyggsHXveO/LBY48y2nwVVbmqnC2nU4/s5abSWEg7IvpcjXjMrUmnQJA=="
+  "resolved" "https://registry.npmjs.org/dotenv-run-script/-/dotenv-run-script-0.2.0.tgz"
+  "version" "0.2.0"
+  dependencies:
+    "dotenv" "^8.2.0"
+    "dotenv-expand" "^5.1.0"
+
 "dotenv@^16.0.3":
   "integrity" "sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ=="
   "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-16.0.3.tgz"
   "version" "16.0.3"
+
+"dotenv@^8.2.0":
+  "integrity" "sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g=="
+  "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-8.6.0.tgz"
+  "version" "8.6.0"
 
 "escape-string-regexp@^1.0.5":
   "integrity" "sha512-vbRorB5FUQWvla16U8R/qgaFIya2qGzwDrNmCZuYKrbdSUMG6I1ZCGQRefkRVhuOkIGVne7BQ35DSfo1qvJqFg=="
