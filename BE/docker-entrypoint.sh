@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo "Wait 10 sec until DB is ready"
+
+sleep 10
+
 echo "Flush the manage.py command it any"
 
 while ! python manage.py flush --no-input 2>&1; do
