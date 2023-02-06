@@ -6,7 +6,6 @@ services:
       - db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=$POSTGRES_DB
-      - POSTGRES_NAME=$POSTGRES_NAME
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
     networks:
@@ -14,9 +13,7 @@ services:
     ports:
       - 5432:5432
   api:
-    # image: localhost:32000/be
-    # image: dmitrylv/todo-be:latest
-    image: dmitrylv/todo-be:v0.1
+    image: dmitrylv/todo-be
     build: ./BE
     # image: be:v1
     volumes:
@@ -24,7 +21,7 @@ services:
     ports:
       - 8000:8000
     environment:
-      - POSTGRES_NAME=$POSTGRES_NAME
+      - POSTGRES_DB=$POSTGRES_DB
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
       - DB_SERVICE_HOST=db
@@ -35,22 +32,10 @@ services:
     depends_on:
       - db
   ui:
-    # image: localhost:32000/fe:latest
-    # image: dmitrylv/todo-fe:latest
-    image: dmitrylv/todo-fe:v0.1
-    build:
-      context: ./FE
-      args:
-        - API_SERVICE_SERVICE_HOST=$API_SERVICE_SERVICE_HOST
-        - API_SERVICE_SERVICE_PORT=$API_SERVICE_SERVICE_PORT
-    # image: fe:v1
-    # volumes:
-    #   - ./FE/:/app/
+    image: dmitrylv/todo-fe
+    build: ./FE
     ports:
       - 5050:5050
-    environment:
-      - API_SERVICE_SERVICE_HOST=$API_SERVICE_SERVICE_HOST
-      - API_SERVICE_SERVICE_PORT=$API_SERVICE_SERVICE_PORT
     networks:
       - be-fe
     depends_on:
@@ -67,7 +52,6 @@ services:
 
 volumes:
   db-data:
-#     driver: bridge
 
 networks:
   be-fe:

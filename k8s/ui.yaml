@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ui-container
-          image: dmitrylv/todo-fe:v0.1
+          image: dmitrylv/todo-fe:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5050

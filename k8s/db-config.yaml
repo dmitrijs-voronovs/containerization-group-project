@@ -5,8 +5,5 @@ metadata:
   labels:
     app: db
 data:
-  POSTGRES_DB: postgres
-  POSTGRES_NAME: postgres
+  POSTGRES_DB: postgres-todos-db
   POSTGRES_USER: postgres
-  POSTGRES_HOST: localhost
-  POSTGRES_PORT: "5432"
