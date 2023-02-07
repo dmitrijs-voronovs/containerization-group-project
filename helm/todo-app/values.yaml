@@ -1,0 +1,127 @@
+# Default values for todo-app.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+deployment:
+  api:
+    replicaCount: 3
+    image:
+      repository: dmitrylv/todo-be
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: latest
+      pullPolicy: Always
+  ui:
+    replicaCount: 3
+    image:
+      repository: dmitrylv/todo-fe
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: latest
+      pullPolicy: IfNotPresent
+  db:
+    replicaCount: 1
+    image:
+      repository: postgres
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: latest
+      pullPolicy: IfNotPresent
+
+secret:
+  # as stringData
+  POSTGRES_PASSWORD: postgres-password
+
+config:
+  POSTGRES_DB: postgres-todos-db
+  POSTGRES_USER: postgres
+
+storage:
+  space: 2Gi
+  mountPath: "/db/data"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  api:
+    type: ClusterIP
+    port: 8000
+  ui:
+    type: LoadBalancer
+    port: 5050
+  db:
+    type: ClusterIP
+    port: 5432
+
+ingress:
+  enabled: true
+  hostname: my-todotracker.com
+  className: ""
+  annotations:
+    # cert-manager.io/issuer: my-ca-issuer
+    # cert-manager.io/cluster-issuer: selfsigned-cluster-issuer
+    # cert-manager.io/common-name: my-todotracker.com
+    # nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+  hosts:
+    []
+    # - my-todotracker.com
+    # - host: chart-example.local
+    #   paths:
+    #     - path: /
+    #       pathType: ImplementationSpecific
+  tls:
+    []
+    # - hosts:
+    #     - my-todotracker.com
+    #   secretName: my-ingress-cert
+
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

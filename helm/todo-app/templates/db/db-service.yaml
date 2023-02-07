@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "todo-app.fullname" . }}--db
+  labels:
+    {{- include "todo-app.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.db.type }}
+  ports:
+    - port: {{ .Values.service.db.port }}
+      targetPort: 5432
+      protocol: TCP
+  selector:
+    app: {{ include "todo-app.fullname" . }}--db
+    {{- include "todo-app.selectorLabels" . | nindent 4 }}

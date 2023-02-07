@@ -1,0 +1,60 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=$POSTGRES_DB
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    networks:
+      - be-db
+    ports:
+      - 5432:5432
+  api:
+    image: dmitrylv/todo-be
+    build: ./BE
+    # image: be:v1
+    volumes:
+      - ./BE/:/app/
+    ports:
+      - 8000:8000
+    environment:
+      - POSTGRES_DB=$POSTGRES_DB
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - DB_SERVICE_HOST=db
+      - DB_SERVICE_PORT=5432
+    networks:
+      - be-fe
+      - be-db
+    depends_on:
+      - db
+  ui:
+    image: dmitrylv/todo-fe
+    build: ./FE
+    ports:
+      - 5050:5050
+    networks:
+      - be-fe
+    depends_on:
+      - api
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    networks:
+      - be-fe
+    depends_on:
+      - ui
+      - api
+
+volumes:
+  db-data:
+
+networks:
+  be-fe:
+    driver: bridge
+  be-db:
+    driver: bridge

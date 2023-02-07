@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ include "todo-app.fullname" . }}--db-pv
+  labels:
+    app: {{ include "todo-app.fullname" . }}--db
+    {{- include "todo-app.labels" . | nindent 4 }}
+spec:
+  storageClassName: microk8s-hostpath
+  capacity:
+    storage: {{ .Values.storage.space }}
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  hostPath:
+    path: {{ .Values.storage.mountPath }}
