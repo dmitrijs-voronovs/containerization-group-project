@@ -56,6 +56,10 @@ spec:
                 secretKeyRef:
                   name: {{ include "todo-app.fullname" . }}--db-secret
                   key: POSTGRES_PASSWORD
+            - name: DB_SERVICE_PORT
+              value: {{ .Values.service.db.port | quote }}
+            - name: DB_SERVICE_HOST
+              value: '{{ include "todo-app.fullname" . }}--db'
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
