@@ -29,3 +29,12 @@ urlpatterns = [
     path("todos/<int:pk>/update/", views.todo_update, name="todo_update"),
     path("todos/<int:pk>/delete/", views.todo_delete, name="todo_delete"),
 ]
+
+# GKE:
+# urlpatterns = [
+#     path("api/todos/", views.todo_list, name="todo_list"),
+#     path("api/todos/<int:pk>/", views.todo_detail, name="todo_detail"),
+#     path("api/todos/create/", views.todo_create, name="todo_create"),
+#     path("api/todos/<int:pk>/update/", views.todo_update, name="todo_update"),
+#     path("api/todos/<int:pk>/delete/", views.todo_delete, name="todo_delete"),
+# ]

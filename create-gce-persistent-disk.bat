@@ -1,0 +1,1 @@
+gcloud compute disks create --size=10Gi --zone=europe-central2-c gce-persistent-disk

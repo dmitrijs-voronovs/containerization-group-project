@@ -6,7 +6,6 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      nodePort: 30002
       port: 5050
       targetPort: 5050
   selector:

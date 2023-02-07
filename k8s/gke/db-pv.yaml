@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: db-pv
+  labels:
+    app: db
+    type: local
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteMany
+  gcePersistentDisk:
+    pdName: gce-persistent-disk
+    fsType: ext4
+  persistentVolumeReclaimPolicy: Recycle

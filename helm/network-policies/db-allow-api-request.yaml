@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "todo-app.fullname" . }}--db-allow-api-read
+spec:
+  podSelector:
+    matchLabels:
+      app: {{ include "todo-app.fullname" . }}--db
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: {{ include "todo-app.fullname" . }}--api
+      ports:
+        - protocol: TCP
+          port: {{ .Values.service.api.port }}

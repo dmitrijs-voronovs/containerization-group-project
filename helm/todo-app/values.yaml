@@ -15,6 +15,7 @@ deployment:
       repository: dmitrylv/todo-fe
       # Overrides the image tag whose default is the chart appVersion.
       tag: latest
+      # tag: v2-canary
       pullPolicy: IfNotPresent
   db:
     replicaCount: 1
