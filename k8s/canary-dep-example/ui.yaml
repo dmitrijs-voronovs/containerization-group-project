@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ui-deployment
+  name: ui-deployment-v2
   labels:
     app: ui
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: ui
-      version: v1
+      version: v2
   template:
     metadata:
       labels:
         app: ui
-        version: v1
+        version: v2
     spec:
       containers:
         - name: ui-container
-          image: dmitrylv/todo-fe:latest
+          image: dmitrylv/todo-fe:v2-canary
           imagePullPolicy: Always
           ports:
             - containerPort: 5050
