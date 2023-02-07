@@ -15,7 +15,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: ingress
+  name: {{ include "todo-app.fullname" . }}--ingress
   labels:
     {{- include "todo-app.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
@@ -44,14 +44,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: ui
+                name: {{ include "todo-app.fullname" . }}--ui
                 port:
                   number: {{ .Values.service.ui.port }}
           - path: /api/?(.*)
             pathType: Prefix
             backend:
               service:
-                name: api
+                name: {{ include "todo-app.fullname" . }}--api
                 port:
                   number: {{ .Values.service.api.port }}
 {{- end }}

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: db-pvc
+  name: {{ include "todo-app.fullname" . }}--db-pvc
   labels:
-    app: db
+    app: {{ include "todo-app.fullname" . }}--db
     {{- include "todo-app.labels" . | nindent 4 }}
 spec:
   storageClassName: microk8s-hostpath
