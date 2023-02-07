@@ -72,3 +72,7 @@ kubectl apply -f k8s/network-policies
 # override with gke-specific objects
 kubectl apply -f k8s/gke
 ```
+
+### GKE
+<img width="1243" alt="image" src="https://user-images.githubusercontent.com/53301511/217386207-0f8b0c93-b1de-4f77-ad07-145902109a88.png">
+
