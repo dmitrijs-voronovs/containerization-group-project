@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: ui-allow-be-communicate
+  name: db-allow-api-read
 spec:
   podSelector:
     matchLabels:
-      app: ui
+      app: db
   ingress:
     - from:
         - podSelector:
